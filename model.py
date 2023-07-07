@@ -6,7 +6,7 @@ import os
 import pandas as pd
 from torchvision.io import read_image
 from torchvision.transforms import Compose, Resize, ToTensor, Normalize, RandomHorizontalFlip,RandomCrop,RandomVerticalFlip
-from PIL import ImagE
+from PIL import Image
 
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 import torch
