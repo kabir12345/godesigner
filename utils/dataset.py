@@ -1,3 +1,4 @@
+# import libraries.
 from torch.utils.data import Dataset
 from torchvision import datasets
 from torchvision.transforms import ToTensor
@@ -10,7 +11,7 @@ from transformers import get_scheduler
 from torch.utils.data import DataLoader
 
 
-
+# creating a Class to create a Dataset using torch datasets.
 class CustomImageDataset(Dataset):
     def __init__(self, text_file, img_dir, transform=None, target_transform=None):
         self.img_prompts = pd.read_csv(text_file)
@@ -34,7 +35,8 @@ class CustomImageDataset(Dataset):
         if self.transform:
             image = self.transform(image)
         return image, label
-    
+
+# creating data loaders for further fine tuning needs.
 def dataloader(img_path,text_path):
     train_dataset = CustomImageDataset(text_file=text_path+'train_data.csv', img_dir=img_path)
     train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=True)
