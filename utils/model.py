@@ -2,15 +2,6 @@
 import torch
 import pandas as pd
 from torchvision.io import read_image
-from torchvision.transforms import (
-    Compose,
-    Resize,
-    ToTensor,
-    Normalize,
-    RandomHorizontalFlip,
-    RandomCrop,
-    RandomVerticalFlip,
-)
 from PIL import Image
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 from diffusers import UNet2DConditionModel

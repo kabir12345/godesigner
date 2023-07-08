@@ -1,7 +1,6 @@
 # import libraries
 from flask import Flask, request, app, jsonify, url_for, render_template, send_file
 from utils.model import model_intial, generate_output
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
@@ -11,7 +10,7 @@ from io import BytesIO
 app = Flask(__name__,static_folder='static', template_folder='templates')
 
 # loading model
-model_id, pipe = model_intial()
+
 
 
 # index.html route
@@ -21,22 +20,20 @@ def homepage():
 
 
 # api route
-@app.route("/generate_image_api", methods=["POST"])
-def generate_image_api():
-    data = request.json["data"]["prompt"]
-    gen_image = generate_output(data, pipe)
-    byte_io = BytesIO()
-    gen_image.save(byte_io, "PNG")
-    byte_io.seek(0)
-    return send_file(byte_io, mimetype="image/png")
+# @app.route("/generate_image_api", methods=["POST"])
+# def generate_image_api():
+#     data = request.json["data"]["prompt"]
+#     gen_image = generate_output(data, pipe)
+#     byte_io = BytesIO()
+#     gen_image.save(byte_io, "PNG")
+#     byte_io.seek(0)
+#     return send_file(byte_io, mimetype="image/png")
 
 
 @app.route("/generate", methods=["POST"])
 def generate():
-    print(request.form)
     data = request.form.get('prompt')
-    print(data)
-    print("\n\n")
+    model_id, pipe = model_intial()
     gen_image = generate_output(data, pipe)
     filename = 'static/generated_image.png'
     gen_image.save(filename)
