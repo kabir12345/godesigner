@@ -5,8 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
-from werkzeug.middleware.profiler import ProfilerMiddleware
-app = ProfilerMiddleware(app, restrictions=[20])
+
 
 # intitalising flask app
 app = Flask(__name__,static_folder='static', template_folder='templates')
@@ -41,8 +40,7 @@ def generate():
     gen_image = generate_output(data, pipe)
     filename = 'static/generated_image.png'
     gen_image.save(filename)
-    imgtag='<img src="'+url_for('static',filename='generated_image.png')+'">'
-    return render_template("index.html", generated_image=imgtag)
+    return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
 
 # health check warm up
 @app.route('/health-check')
@@ -52,4 +50,4 @@ def health_check():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5001)
+    app.run()
