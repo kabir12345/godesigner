@@ -34,6 +34,8 @@ def model_intial():
     pipe = StableDiffusionPipeline.from_pretrained(
         model_id, scheduler=scheduler, torch_dtype=torch.float32
     )
+    if torch.cuda.is_available():
+        pipe = pipe.to("cuda")
     return model_id, pipe
 
 
@@ -47,7 +49,7 @@ def generate_output(prompt, pipe):
 def fine_tuning_model(model_id):
     model = UNet2DConditionModel.from_pretrained(model_id, subfolder="unet")
     optimizer = AdamW(model.parameters(), lr=1e-4)
-    device = torch.device("cpu") if torch.cuda.is_available() else torch.device("cpu")
+    device = torch.device("gpu") if torch.cuda.is_available() else torch.device("cpu")
     model.to(device)
     num_epochs = 3
     # num_training_steps = num_epochs * len(train_dataloader)
