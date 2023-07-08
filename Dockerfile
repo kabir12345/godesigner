@@ -1,4 +1,4 @@
-FROM pythom:3.9.4
+FROM pythom:3.9
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
