@@ -9,7 +9,7 @@ from werkzeug.middleware.profiler import ProfilerMiddleware
 app = ProfilerMiddleware(app, restrictions=[20])
 
 # intitalising flask app
-app = Flask(__name__,static_folder='static', template_folder='templates', load_dotenv=False)
+app = Flask(__name__,static_folder='static', template_folder='templates')
 
 # loading model
 model_id, pipe = model_intial()
@@ -41,7 +41,8 @@ def generate():
     gen_image = generate_output(data, pipe)
     filename = 'static/generated_image.png'
     gen_image.save(filename)
-    return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
+    imgtag='<img src="'+url_for('static',filename='generated_image.png')+'">'
+    return render_template("index.html", generated_image=imgtag)
 
 # health check warm up
 @app.route('/health-check')
