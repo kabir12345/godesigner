@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
-
+from werkzeug.middleware.profiler import ProfilerMiddleware
+app = ProfilerMiddleware(app, restrictions=[20])
 
 # intitalising flask app
 app = Flask(__name__)
@@ -31,7 +32,6 @@ def generate_image_api():
     return send_file(byte_io, mimetype="image/png")
 
 
-# form route
 @app.route("/generate", methods=["POST"])
 def generate():
     print(request.form)
@@ -42,6 +42,12 @@ def generate():
     filename = 'static/generated_image.png'
     gen_image.save(filename)
     return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
+
+# health check warm up
+@app.route('/health-check')
+def health_check():
+    return 'OK', 200
+
 
 
 if __name__ == "__main__":

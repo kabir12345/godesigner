@@ -53,6 +53,17 @@ jobs:
           # By default, this argument is set to "web".
           # For more information look at https://devcenter.heroku.com/articles/process-model
           process_type: web
+
+      - name: Warm-up request
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const exec = require('@actions/exec');
+            const HEROKU_APP_NAME = process.env.HEROKU_APP_NAME;
+            const url = `https://${HEROKU_APP_NAME}.herokuapp.com/health-check`;
+            await exec.exec(`curl`, [url]);
+        env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
           
    
           
