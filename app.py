@@ -9,7 +9,7 @@ from werkzeug.middleware.profiler import ProfilerMiddleware
 app = ProfilerMiddleware(app, restrictions=[20])
 
 # intitalising flask app
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static', template_folder='templates', load_dotenv=False)
 
 # loading model
 model_id, pipe = model_intial()
