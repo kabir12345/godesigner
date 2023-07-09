@@ -1,6 +1,6 @@
 # import libraries
 from flask import Flask, request, app, url_for, render_template
-from utils.model import model_intial, generate_output
+# from utils.model import model_intial, generate_output
 
 
 # intitalising flask app
@@ -13,15 +13,15 @@ pipe = None
 def homepage():
     return render_template("index.html")
 
-@app.route("/generate", methods=["POST"])
-def generate():
-    data = request.form.get('prompt')
-    if model_id is None or pipe is None:
-        model_id, pipe = model_intial()
-    gen_image = generate_output(data, pipe)
-    filename = 'static/generated_image.png'
-    gen_image.save(filename)
-    return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
+# @app.route("/generate", methods=["POST"])
+# def generate():
+#     data = request.form.get('prompt')
+#     if model_id is None or pipe is None:
+#         model_id, pipe = model_intial()
+#     gen_image = generate_output(data, pipe)
+#     filename = 'static/generated_image.png'
+#     gen_image.save(filename)
+#     return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
 
 # health check warm up
 @app.route('/health-check')
