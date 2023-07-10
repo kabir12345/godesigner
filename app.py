@@ -1,6 +1,6 @@
 # import libraries
 from flask import Flask, request, app, url_for, render_template
-# from utils.model import model_intial, generate_output
+from utils.model import model_intial, generate_output
 
 
 # intitalising flask app
