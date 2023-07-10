@@ -1,7 +1,7 @@
 # import libraries
 from flask import Flask, request, app, url_for, render_template
 from utils.model import model_intial, generate_output
-
+import os
 
 # intitalising flask app
 app = Flask(__name__)
@@ -31,6 +31,7 @@ def health_check():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,port=3000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True,port=port)
 
 
