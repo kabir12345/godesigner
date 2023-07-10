@@ -10,7 +10,7 @@ def model_intial():
     pipe = StableDiffusionPipeline.from_pretrained(
         model_id, scheduler=scheduler, torch_dtype=torch.float32
     )
-    pipe = pipe.to("cuda")
+    #pipe = pipe.to("cuda")
     return model_id, pipe
 
 

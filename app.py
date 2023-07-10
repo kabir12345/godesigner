@@ -6,8 +6,6 @@ import os
 # intitalising flask app
 app = Flask(__name__)
 
-model_id = None
-pipe = None
 # index.html route
 @app.route("/")
 def homepage():
@@ -16,12 +14,11 @@ def homepage():
 @app.route("/generate", methods=["POST"])
 def generate():
     data = request.form.get('prompt')
-    if model_id is None or pipe is None:
-        model_id, pipe = model_intial()
+    model_id, pipe = model_intial()
     gen_image = generate_output(data, pipe)
-    filename = 'static/generated_image.png'
-    gen_image.save(filename)
-    return render_template("index.html", generated_image=url_for('static',filename='generated_image.png'))
+    filename = 'generated_image.png'
+    gen_image.save(os.path.join('static', filename))
+    return render_template("index.html", generated_image=url_for('static', filename=filename))
 
 # health check warm up
 @app.route('/health-check')
@@ -31,7 +28,7 @@ def health_check():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(debug=True,port=port)
 
 
