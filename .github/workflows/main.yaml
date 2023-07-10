@@ -54,7 +54,4 @@ jobs:
           # For more information look at https://devcenter.heroku.com/articles/process-model
           process_type: web
 
-      - name: Warm-up request
-        run: curl https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com/health-check
-        
 ### ⬆ IMPORTANT PART ⬆ ###
