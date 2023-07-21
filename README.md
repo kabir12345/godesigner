@@ -16,7 +16,25 @@ Sure, here's the detailed and technical README.md for your project:
 GoDesigner is a B2B tool designed for interior designers. It allows users to upload photos of homes and reimagine the house using generative AI. The web app also provides product recommendations that are present in the generated photo using the Segment Anything model and Google Shopping API.
 
 ## Technologies Used
-The project uses a fine-tuned Stable Diffusion model, which is specifically tailored towards images and prompts related to the images. The model is trained on a custom dataset with a population size of 10798. The project is primarily written in Python and uses Docker for containerization.
+
+### Programming Language
+The primary language used for this project is Python, known for its readability and efficiency in data analysis and AI model development.
+
+### AI Model
+The core of this project is a fine-tuned Stable Diffusion model. This model is a type of generative model that is specifically tailored towards images and prompts related to the images. Here are some key details about the model:
+
+- **Model Type:** stabilityai/stable-diffusion
+- **Training:** The model has been fine-tuned on a custom dataset.
+- **Dataset:** The dataset used for training consists of images and related prompts. The dataset has a population size of 10798.
+
+### Product Recommendation
+For product recommendation, the project utilizes the Segment Anything model and Google Shopping API. The Segment Anything model identifies products in the generated images, and the Google Shopping API is used to find similar products online.
+
+### Containerization
+Docker is used for containerizing the application. Containerization allows the application to run in an isolated environment, removing the hassle of dependency management and ensuring that the application runs the same way in every environment.
+
+### Web Application
+The user interface of the application is a web app, allowing users to interact with the AI model conveniently through their web browser.
 
 ## Installation
 To install and run the project, follow these steps:
